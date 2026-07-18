@@ -68,7 +68,7 @@ function QRDetail() {
     : buildQRValue(c.type, content);
 
   const save = async () => {
-    const { error } = await supabase.from("qr_codes").update({ name, content, design: design as never }).eq("id", id);
+    const { error } = await supabase.from("qr_codes").update({ name, content: content as never, design: design as never }).eq("id", id);
     if (error) toast.error(error.message);
     else { toast.success("Saved"); query.refetch(); }
   };

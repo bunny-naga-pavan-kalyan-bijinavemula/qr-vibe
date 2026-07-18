@@ -9,38 +9,174 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AuthRouteImport } from './routes/auth'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as RCodeRouteImport } from './routes/r.$code'
+import { Route as AuthenticatedQrCodesRouteImport } from './routes/_authenticated/qr-codes'
+import { Route as AuthenticatedProfileRouteImport } from './routes/_authenticated/profile'
+import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
+import { Route as AuthenticatedCategoriesRouteImport } from './routes/_authenticated/categories'
+import { Route as AuthenticatedAnalyticsRouteImport } from './routes/_authenticated/analytics'
+import { Route as AuthenticatedQrNewRouteImport } from './routes/_authenticated/qr.new'
+import { Route as AuthenticatedQrIdRouteImport } from './routes/_authenticated/qr.$id'
 
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RCodeRoute = RCodeRouteImport.update({
+  id: '/r/$code',
+  path: '/r/$code',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthenticatedQrCodesRoute = AuthenticatedQrCodesRouteImport.update({
+  id: '/qr-codes',
+  path: '/qr-codes',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedProfileRoute = AuthenticatedProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedCategoriesRoute = AuthenticatedCategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedAnalyticsRoute = AuthenticatedAnalyticsRouteImport.update({
+  id: '/analytics',
+  path: '/analytics',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedQrNewRoute = AuthenticatedQrNewRouteImport.update({
+  id: '/qr/new',
+  path: '/qr/new',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
+const AuthenticatedQrIdRoute = AuthenticatedQrIdRouteImport.update({
+  id: '/qr/$id',
+  path: '/qr/$id',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/categories': typeof AuthenticatedCategoriesRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/qr-codes': typeof AuthenticatedQrCodesRoute
+  '/r/$code': typeof RCodeRoute
+  '/qr/$id': typeof AuthenticatedQrIdRoute
+  '/qr/new': typeof AuthenticatedQrNewRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/auth': typeof AuthRoute
+  '/analytics': typeof AuthenticatedAnalyticsRoute
+  '/categories': typeof AuthenticatedCategoriesRoute
+  '/dashboard': typeof AuthenticatedDashboardRoute
+  '/profile': typeof AuthenticatedProfileRoute
+  '/qr-codes': typeof AuthenticatedQrCodesRoute
+  '/r/$code': typeof RCodeRoute
+  '/qr/$id': typeof AuthenticatedQrIdRoute
+  '/qr/new': typeof AuthenticatedQrNewRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/_authenticated/analytics': typeof AuthenticatedAnalyticsRoute
+  '/_authenticated/categories': typeof AuthenticatedCategoriesRoute
+  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/profile': typeof AuthenticatedProfileRoute
+  '/_authenticated/qr-codes': typeof AuthenticatedQrCodesRoute
+  '/r/$code': typeof RCodeRoute
+  '/_authenticated/qr/$id': typeof AuthenticatedQrIdRoute
+  '/_authenticated/qr/new': typeof AuthenticatedQrNewRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/auth'
+    | '/analytics'
+    | '/categories'
+    | '/dashboard'
+    | '/profile'
+    | '/qr-codes'
+    | '/r/$code'
+    | '/qr/$id'
+    | '/qr/new'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/auth'
+    | '/analytics'
+    | '/categories'
+    | '/dashboard'
+    | '/profile'
+    | '/qr-codes'
+    | '/r/$code'
+    | '/qr/$id'
+    | '/qr/new'
+  id:
+    | '__root__'
+    | '/'
+    | '/_authenticated'
+    | '/auth'
+    | '/_authenticated/analytics'
+    | '/_authenticated/categories'
+    | '/_authenticated/dashboard'
+    | '/_authenticated/profile'
+    | '/_authenticated/qr-codes'
+    | '/r/$code'
+    | '/_authenticated/qr/$id'
+    | '/_authenticated/qr/new'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
+  AuthRoute: typeof AuthRoute
+  RCodeRoute: typeof RCodeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +184,93 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/r/$code': {
+      id: '/r/$code'
+      path: '/r/$code'
+      fullPath: '/r/$code'
+      preLoaderRoute: typeof RCodeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/_authenticated/qr-codes': {
+      id: '/_authenticated/qr-codes'
+      path: '/qr-codes'
+      fullPath: '/qr-codes'
+      preLoaderRoute: typeof AuthenticatedQrCodesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/profile': {
+      id: '/_authenticated/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof AuthenticatedProfileRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/dashboard': {
+      id: '/_authenticated/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/categories': {
+      id: '/_authenticated/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof AuthenticatedCategoriesRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/analytics': {
+      id: '/_authenticated/analytics'
+      path: '/analytics'
+      fullPath: '/analytics'
+      preLoaderRoute: typeof AuthenticatedAnalyticsRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/qr/new': {
+      id: '/_authenticated/qr/new'
+      path: '/qr/new'
+      fullPath: '/qr/new'
+      preLoaderRoute: typeof AuthenticatedQrNewRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/qr/$id': {
+      id: '/_authenticated/qr/$id'
+      path: '/qr/$id'
+      fullPath: '/qr/$id'
+      preLoaderRoute: typeof AuthenticatedQrIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedAnalyticsRoute: typeof AuthenticatedAnalyticsRoute
+  AuthenticatedCategoriesRoute: typeof AuthenticatedCategoriesRoute
+  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedProfileRoute: typeof AuthenticatedProfileRoute
+  AuthenticatedQrCodesRoute: typeof AuthenticatedQrCodesRoute
+  AuthenticatedQrIdRoute: typeof AuthenticatedQrIdRoute
+  AuthenticatedQrNewRoute: typeof AuthenticatedQrNewRoute
+}
+
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedAnalyticsRoute: AuthenticatedAnalyticsRoute,
+  AuthenticatedCategoriesRoute: AuthenticatedCategoriesRoute,
+  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedProfileRoute: AuthenticatedProfileRoute,
+  AuthenticatedQrCodesRoute: AuthenticatedQrCodesRoute,
+  AuthenticatedQrIdRoute: AuthenticatedQrIdRoute,
+  AuthenticatedQrNewRoute: AuthenticatedQrNewRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
+  AuthRoute: AuthRoute,
+  RCodeRoute: RCodeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

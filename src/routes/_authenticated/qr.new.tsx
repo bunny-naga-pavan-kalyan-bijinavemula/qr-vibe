@@ -54,7 +54,7 @@ function NewQR() {
         user_id: userData.user.id,
         name,
         type,
-        content,
+        content: content as never,
         design: design as never,
         is_dynamic: isDynamic && meta.supportsDynamic,
         short_code: isDynamic && meta.supportsDynamic ? shortCode : null,

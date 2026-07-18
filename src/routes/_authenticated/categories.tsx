@@ -64,7 +64,7 @@ function Categories() {
             <div className="divide-y">
               {(query.data ?? []).map((cat) => (
                 <div key={cat.id} className="p-4 flex items-center gap-3">
-                  <div className="size-8 rounded-lg" style={{ background: cat.color }} />
+                  <div className="size-8 rounded-lg" style={{ background: cat.color || "#4f46e5" }} />
                   <span className="font-semibold flex-1">{cat.name}</span>
                   <Button variant="ghost" size="icon" onClick={() => remove(cat.id)}><Trash2 className="size-4 text-destructive" /></Button>
                 </div>
